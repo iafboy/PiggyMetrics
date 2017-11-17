@@ -1,0 +1,36 @@
+security:
+  oauth2:
+    client:
+      clientId: license-service
+      clientSecret: ${ACCOUNT_SERVICE_PASSWORD}
+      accessTokenUri: http://auth-service:5000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+server:
+  context-path: /license-service
+  port: 6003
+
+mybatisdb:
+  filters: stat
+  initialSize: 1
+  maxActive: 50
+  minIdle: 2
+  maxWait: 30000
+  timeBetweenEvictionRunsMillis: 30000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery:  "SELECT 1 FROM DUAL"
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  poolPreparedStatements: false
+  maxPoolPreparedStatementPerConnectionSize: 20
+  removeAbandoned: true
+  removeAbandonedTimeout: 1800
+  logAbandoned: true
+  url: jdbc:oracle:thin:@140.86.0.30:1521:ORCL
+  username: customs
+  password: Welcome1
+  logSlowSql: false
+  mergeSql: false
+  slowSqlMillis: 1000

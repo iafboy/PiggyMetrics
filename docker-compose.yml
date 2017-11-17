@@ -13,7 +13,7 @@ services:
   config:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: sqshq/piggymetrics-config
+    image: iafboy/piggymetrics-config
     restart: always
     logging:
       options:
@@ -23,7 +23,7 @@ services:
   registry:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: sqshq/piggymetrics-registry
+    image: iafboy/piggymetrics-registry
     restart: always
     depends_on:
       config:
@@ -38,7 +38,7 @@ services:
   gateway:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: sqshq/piggymetrics-gateway
+    image: iafboy/piggymetrics-gateway
     restart: always
     depends_on:
       config:
@@ -57,7 +57,7 @@ services:
       STATISTICS_SERVICE_PASSWORD: $STATISTICS_SERVICE_PASSWORD
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: sqshq/piggymetrics-auth-service
+    image: iafboy/piggymetrics-auth-service
     restart: always
     depends_on:
       config:
@@ -67,10 +67,11 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  auth-mongodb:
+  common-mongodb:
     environment:
+      INIT_DUMP: account-service-dump.js
       MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: sqshq/piggymetrics-mongodb
+    image: iafboy/piggymetrics-mongodb
     restart: always
     logging:
       options:
@@ -82,22 +83,11 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: sqshq/piggymetrics-account-service
+    image: iafboy/piggymetrics-account-service
     restart: always
     depends_on:
       config:
         condition: service_healthy
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
-  account-mongodb:
-    environment:
-      INIT_DUMP: account-service-dump.js
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: sqshq/piggymetrics-mongodb
-    restart: always
     logging:
       options:
         max-size: "10m"
@@ -108,21 +98,11 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
       STATISTICS_SERVICE_PASSWORD: $STATISTICS_SERVICE_PASSWORD
-    image: sqshq/piggymetrics-statistics-service
+    image: iafboy/piggymetrics-statistics-service
     restart: always
     depends_on:
       config:
         condition: service_healthy
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
-  statistics-mongodb:
-    environment:
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: sqshq/piggymetrics-mongodb
-    restart: always
     logging:
       options:
         max-size: "10m"
@@ -133,7 +113,7 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
       NOTIFICATION_SERVICE_PASSWORD: $NOTIFICATION_SERVICE_PASSWORD
-    image: sqshq/piggymetrics-notification-service
+    image: iafboy/piggymetrics-notification-service
     restart: always
     depends_on:
       config:
@@ -143,20 +123,10 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  notification-mongodb:
-    image: sqshq/piggymetrics-mongodb
-    restart: always
-    environment:
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
   monitoring:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: sqshq/piggymetrics-monitoring
+    image: iafboy/piggymetrics-monitoring
     restart: always
     depends_on:
       config:
