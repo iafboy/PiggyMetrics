@@ -4,6 +4,16 @@ services:
     ports:
       - 5672:5672
 
+  zipkindb:
+    build: zipkindb
+    ports:
+      - 3306:3306
+
+  zipkin-server:
+    build: zipkin-server
+    ports:
+      - 9411:9411
+
   config:
     build: config
     ports:
@@ -29,6 +39,11 @@ services:
     build: account-service
     ports:
       - 6000:6000
+
+  license-service:
+    build: license-service
+    ports:
+      - 6100:6100
 
   statistics-service:
     build: statistics-service

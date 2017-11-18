@@ -21,7 +21,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.liuwq.marketOperation.message"))
+                .apis(RequestHandlerSelectors.basePackage("com.cncustompoc.license"))
                 .paths(PathSelectors.any())
                 .build()
                 .pathMapping("/")

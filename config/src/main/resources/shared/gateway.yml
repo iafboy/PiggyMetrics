@@ -41,5 +41,10 @@ zuul:
         stripPrefix: false
         sensitiveHeaders:
 
+    license-service:
+            path: /licenses/**
+            serviceId: license-service
+            stripPrefix: false
+            sensitiveHeaders:
 server:
   port: 4000

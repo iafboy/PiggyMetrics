@@ -10,6 +10,27 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  zipkindb:
+    image: mysql:5.7
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  zipkin-server:
+    environment:
+          CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    image: cncustompoc-zipkin-server
+    restart: always
+    depends_on:
+          config:
+            condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
   config:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
@@ -82,6 +103,21 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
+    image: iafboy/piggymetrics-account-service
+    restart: always
+    depends_on:
+      config:
+        condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  license-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      LICENSE_SERVICE_PASSWORD: $LICENSE_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: iafboy/piggymetrics-account-service
     restart: always

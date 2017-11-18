@@ -12,9 +12,9 @@ spring:
     strategy:
       enabled: false
   datasource:
-    url: jdbc:mysql://140.86.0.252:3306/zipkindatabase?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
-    username: root
-    password: Welcome,123
+    url: jdbc:mysql://zipkindb:3306/zipkindatabase?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: zipkinuser
+    password: Welcome1
     driver-class-name: com.mysql.jdbc.Driver
     initialize: true
     continue-on-error: true
