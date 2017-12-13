@@ -119,7 +119,7 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       LICENSE_SERVICE_PASSWORD: $LICENSE_SERVICE_PASSWORD
       MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: iafboy/piggymetrics-account-service
+    image: iafboy/piggymetrics-license-service
     restart: always
     depends_on:
       config:
