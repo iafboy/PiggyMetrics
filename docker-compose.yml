@@ -18,25 +18,9 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  zipkin-server:
-    environment:
-          CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: iafboy/piggymetrics-zipkin-server
-    restart: always
-    depends_on:
-          config:
-            condition: service_healthy
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
   elk-server:
     image: iafboy/elk-server
     restart: always
-    depends_on:
-          config:
-            condition: service_healthy
     logging:
       options:
         max-size: "10m"
@@ -47,6 +31,19 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: iafboy/piggymetrics-config
     restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  zipkin-server:
+    environment:
+          CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    image: iafboy/piggymetrics-zipkin-server
+    restart: always
+    depends_on:
+          config:
+            condition: service_healthy
     logging:
       options:
         max-size: "10m"
