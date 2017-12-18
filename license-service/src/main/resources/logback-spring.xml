@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--该日志将日志级别不同的log信息保存到不同的文件中 -->
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <springProperty scope="context" name="springAppName"
