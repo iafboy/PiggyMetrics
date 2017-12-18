@@ -11,7 +11,7 @@ services:
         max-file: "10"
 
   zipkindb:
-    image: mysql:5.7
+    image: iafboy/zipkindb
     restart: always
     logging:
       options:
@@ -21,7 +21,18 @@ services:
   zipkin-server:
     environment:
           CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: cncustompoc-zipkin-server
+    image: iafboy/piggymetrics-zipkin-server
+    restart: always
+    depends_on:
+          config:
+            condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  elk-server:
+    image: iafboy/elk-server
     restart: always
     depends_on:
           config:
