@@ -1,0 +1,57 @@
+--------------------------------------------------------
+--  文件已创建 - 星期二-十二月-19-2017   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table LICENSETRACE
+--------------------------------------------------------
+
+  CREATE TABLE "CUSTOMS"."LICENSETRACE" 
+   (	"ID" NUMBER(*,0), 
+	"LICENSEID" VARCHAR2(100 BYTE), 
+	"GOODSID" NUMBER(*,0), 
+	"ENTERPRISEID" VARCHAR2(100 BYTE), 
+	"ENTERPRISENAME" VARCHAR2(100 BYTE), 
+	"DECLARATIONID" NUMBER(*,0), 
+	"ENTERPRISEAVAILABLENUMBEROLD" NUMBER(*,0), 
+	"ENTERPRISEAVAILABLENUMBERNEW" NUMBER(*,0), 
+	"GOODSCODE" VARCHAR2(100 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C0019496
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "CUSTOMS"."SYS_C0019496" ON "CUSTOMS"."LICENSETRACE" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Trigger LICENSETRACE_ID
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "CUSTOMS"."LICENSETRACE_ID" 
+  before insert on LicenseTrace 
+  for each row
+begin
+    select SEQ_LicenseTrace.nextval 
+    into:new.id from sys.dual;
+end;
+/
+ALTER TRIGGER "CUSTOMS"."LICENSETRACE_ID" ENABLE;
+--------------------------------------------------------
+--  Constraints for Table LICENSETRACE
+--------------------------------------------------------
+
+  ALTER TABLE "CUSTOMS"."LICENSETRACE" ADD PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
