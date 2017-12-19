@@ -11,7 +11,7 @@ services:
         max-file: "10"
 
   zipkindb:
-    image: iafboy/zipkindb
+    image: iafboy/piggymetrics-zipkindb
     restart: always
     logging:
       options:
@@ -19,7 +19,7 @@ services:
         max-file: "10"
 
   elk-server:
-    image: iafboy/elk-server
+    image: iafboy/piggymetrics-elk-server
     restart: always
     logging:
       options:
@@ -100,7 +100,7 @@ services:
     environment:
       INIT_DUMP: account-service-dump.js
       MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: iafboy/piggymetrics-mongodb
+    image: iafboy/piggymetrics-common-mongodb
     restart: always
     logging:
       options:
@@ -126,7 +126,6 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       LICENSE_SERVICE_PASSWORD: $LICENSE_SERVICE_PASSWORD
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: iafboy/piggymetrics-license-service
     restart: always
     depends_on:
