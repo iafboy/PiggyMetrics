@@ -9,10 +9,10 @@ services:
     ports:
       - 3306:3306
 
-  zipkin-server:
-    build: zipkin-server
+  common-mongodb:
+    build: mongodb
     ports:
-      - 9411:9411
+      - 25000:27017
 
   elk-server:
     build: elk-server
@@ -28,21 +28,21 @@ services:
     ports:
       - 8888:8888
 
-  registry:
-    build: registry
-
-  gateway:
-    build: gateway
+  zipkin-server:
+    build: zipkin-server
+    ports:
+      - 9411:9411
 
   auth-service:
     build: auth-service
     ports:
       - 5000:5000
 
-  common-mongodb:
-    build: mongodb
-    ports:
-      - 25000:27017
+  registry:
+    build: registry
+
+  gateway:
+    build: gateway
 
   account-service:
     build: account-service
